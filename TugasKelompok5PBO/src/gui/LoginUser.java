@@ -11,6 +11,7 @@ public class LoginUser extends JFrame{
     private ComponentGui cg = new ComponentGui();
     
     public LoginUser() {
+        initComponent();
     }
     
     void initComponent(){

@@ -13,15 +13,19 @@ public class AdminController{
         return AllObjModel.adminModel.getAdmin(id);
     }
     
-    public void insert(String nama, String alamat, String noTelp, String username, String password){    
-        AllObjModel.adminModel.insertAdmin(nama, alamat, noTelp, username, password);
+    public int insert(String nama, String alamat, String noTelp, String username, String password){    
+        return AllObjModel.adminModel.insertAdmin(nama, alamat, noTelp, username, password);
     }
     
-    public void updatePassword(int id, String password){
-        AllObjModel.adminModel.updatePassAdmin(id, password);
+    public int updatePassword(int id, String password){
+        return AllObjModel.adminModel.updatePassAdmin(id, password);
     }
     
-    public void delete(int id){
-        AllObjModel.adminModel.deleteAdmin(id);
+    public int delete(int id){
+        return AllObjModel.adminModel.deleteAdmin(id);
+    }
+    
+    public int cekLogin(String username, String password){
+        return AllObjModel.adminModel.cekLogin(username, password);
     }
 }

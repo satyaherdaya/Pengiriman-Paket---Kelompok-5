@@ -1,0 +1,44 @@
+CREATE TABLE admin(
+    id int not null primary key auto_increment,
+    nama varchar(50) not null,
+    alamat varchar(50) not null,
+    noTelp varchar(20) not null,
+    username varchar(20) not null,
+    password varchar(20) not null
+);
+
+CREATE TABLE pengguna(
+    id int not null primary key auto_increment,
+    nama varchar(50) not null,
+    alamat varchar(50) not null,
+    noTelp varchar(20) not null,
+    username varchar(20) not null,
+    password varchar(20) not null
+);
+
+CREATE TABLE penerima(
+    id int not null primary key auto_increment,
+    nama varchar(50) not null,
+    alamat varchar(50) not null,
+    noTelp varchar(20) not null,
+);
+
+CREATE TABLE paket(
+    id int not null primary key auto_increment,
+    namaBarang varchar(50) not null,
+    beratBarang int not null
+);
+
+create TABLE resi(
+    id int not null primary key AUTO_INCREMENT,
+    pengirim int not null,
+    penerima int not null,
+    paket int not null,
+    waktuBerangkat varchar(50),
+    estimasiSampai varchar(50),
+    status int not null default 0
+);
+
+INSERT INTO admin(nama,alamat,noTelp,username,password) values(
+    'sivana','surabaya','081','sivana','sivana'
+);

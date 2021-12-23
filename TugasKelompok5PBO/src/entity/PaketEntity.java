@@ -1,28 +1,18 @@
 package entity;
 
-class StatusKirim{
-    public static final int SELESAI=1;
-}
-
 public class PaketEntity {
     private int id;
-    private UserEntity penduduk;
-    private PenerimaEntity penerima;
-    private String waktuBerangkat;
-    private String waktuSampai;
-    private int status;
+    private String namaPaket;
+    private int beratPaket;
 
     public PaketEntity(){
-        status = StatusKirim.SELESAI;
     }
-    
-    public PaketEntity(UserEntity penduduk, PenerimaEntity penerima, String waktuBerangkat, String waktuSampai) {
-        this.penduduk = penduduk;
-        this.penerima = penerima;
-        this.waktuBerangkat = waktuBerangkat;
-        this.waktuSampai = waktuSampai;
+
+    public PaketEntity(String namaPaket, int beratPaket) {
+        this.namaPaket = namaPaket;
+        this.beratPaket = beratPaket;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -31,43 +21,21 @@ public class PaketEntity {
         this.id = id;
     }
 
-    public UserEntity getPenduduk() {
-        return penduduk;
+    public String getNamaPaket() {
+        return namaPaket;
     }
 
-    public void setPenduduk(UserEntity penduduk) {
-        this.penduduk = penduduk;
+    public void setNamaPaket(String namaPaket) {
+        this.namaPaket = namaPaket;
     }
 
-    public PenerimaEntity getPenerima() {
-        return penerima;
+    public int getBeratPaket() {
+        return beratPaket;
     }
 
-    public void setPenerima(PenerimaEntity penerima) {
-        this.penerima = penerima;
+    public void setBeratPaket(int beratPaket) {
+        this.beratPaket = beratPaket;
     }
-
-    public String getWaktuBerangkat() {
-        return waktuBerangkat;
-    }
-
-    public void setWaktuBerangkat(String waktuBerangkat) {
-        this.waktuBerangkat = waktuBerangkat;
-    }
-
-    public String getWaktuSampai() {
-        return waktuSampai;
-    }
-
-    public void setWaktuSampai(String waktuSampai) {
-        this.waktuSampai = waktuSampai;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
+    
+    
 }

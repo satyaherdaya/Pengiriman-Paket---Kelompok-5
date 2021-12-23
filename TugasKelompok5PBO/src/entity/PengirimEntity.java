@@ -1,15 +1,15 @@
 package entity;
 
-public class UserEntity extends PendudukEntity{
+public class PengirimEntity extends PendudukEntity{
     protected LoginEntity loginUser;
     protected int idPaket;
     protected int resiId;
     
-    public UserEntity() {
+    public PengirimEntity() {
     }
 
-    public UserEntity(LoginEntity loginUser, int id, String nama, String alamat, String noTelp) {
-        super(id, nama, alamat, noTelp);
+    public PengirimEntity(LoginEntity loginUser, String nama, String alamat, String noTelp) {
+        super(nama, alamat, noTelp);
         this.loginUser = loginUser;
     }
 

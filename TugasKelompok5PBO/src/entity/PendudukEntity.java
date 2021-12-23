@@ -9,8 +9,7 @@ public class PendudukEntity{
     public PendudukEntity() {
     }
 
-    public PendudukEntity(int id, String nama, String alamat, String noTelp) {
-        this.id = id;
+    public PendudukEntity(String nama, String alamat, String noTelp) {
         this.nama = nama;
         this.alamat = alamat;
         this.noTelp = noTelp;

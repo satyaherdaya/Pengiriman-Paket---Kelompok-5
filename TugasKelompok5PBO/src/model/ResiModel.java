@@ -6,18 +6,14 @@ import java.sql.*;
 
 public class ResiModel extends AbstractClass{
     public int insert(ResiEntity resi){
-        sql = "INSERT INTO resi(id,namaPengirim,alamatPengirim,noTelpPengirim,namaPenerima,alamatPenerima,noTelpPenerima,tanggalBerangkat,estimasiSampai) VALUES(?,?,?,?,?,?,?,?,?)";
+        sql = "INSERT INTO resi(pengirim,penerima,paket,tanggalBerangkat,estimasiSampai) VALUES(?,?,?,?,?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, resi.getId());
-            ps.setString(2,resi.getPaket().getPenduduk().getNama());
-            ps.setString(3,resi.getPaket().getPenduduk().getAlamat());
-            ps.setString(4,resi.getPaket().getPenduduk().getNoTelp());
-            ps.setString(5,resi.getPaket().getPenerima().getNama());
-            ps.setString(6,resi.getPaket().getPenerima().getAlamat());
-            ps.setString(7,resi.getPaket().getPenerima().getNoTelp());
-            ps.setString(8,resi.getPaket().getWaktuBerangkat());
-            ps.setString(9,resi.getPaket().getWaktuSampai());
+            ps.setInt(1,resi.getPenduduk().getId());
+            ps.setInt(2,resi.getPenerima().getId());
+            ps.setInt(3,resi.getPaket().getId());
+            ps.setString(4,resi.getWaktuBerangkat());
+            ps.setString(5,resi.getWaktuSampai());
             return ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -36,14 +32,11 @@ public class ResiModel extends AbstractClass{
             while(rs.next()){
                 ResiEntity resi = new ResiEntity();
                 resi.setId(rs.getInt("id"));
-                resi.getPaket().getPenduduk().setNama(rs.getString("namaPengirim"));
-                resi.getPaket().getPenduduk().setAlamat(rs.getString("alamatPengirim"));
-                resi.getPaket().getPenduduk().setNoTelp(rs.getString("noTelpPengirim"));
-                resi.getPaket().getPenerima().setNama(rs.getString("namaPenerima"));
-                resi.getPaket().getPenerima().setAlamat(rs.getString("alamatPenerima"));
-                resi.getPaket().getPenerima().setNoTelp(rs.getString("noTelpPenerima"));
-                resi.getPaket().setWaktuBerangkat(rs.getString("tanggalBerangkat"));
-                resi.getPaket().setWaktuSampai(rs.getString("estimasiSampai"));
+                resi.getPenduduk().setId(rs.getInt("pengirim"));
+                resi.getPenerima().setId(rs.getInt("penerima"));
+                resi.getPaket().setId(rs.getInt("noTelpPenerima"));
+                resi.setWaktuBerangkat(rs.getString("tanggalBerangkat"));
+                resi.setWaktuSampai(rs.getString("estimasiSampai"));
                 resi.setStatus(rs.getInt("status"));
             }
         }catch(Exception e){

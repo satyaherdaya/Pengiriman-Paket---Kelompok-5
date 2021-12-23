@@ -6,8 +6,8 @@ public class AdminEntity extends PendudukEntity{
     public AdminEntity(){
     }
 
-    public AdminEntity(LoginEntity loginAdmin, int id, String nama, String alamat, String noTelp){
-        super(id, nama, alamat, noTelp);
+    public AdminEntity(LoginEntity loginAdmin, String nama, String alamat, String noTelp){
+        super(nama, alamat, noTelp);
         this.loginAdmin = loginAdmin;
     }
 }

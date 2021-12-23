@@ -1,9 +1,5 @@
 package entity;
 
-class StatusKirim{
-    public static final int SELESAI=1;
-}
-
 public class ResiEntity {
     protected int id;
     protected PaketEntity paket;

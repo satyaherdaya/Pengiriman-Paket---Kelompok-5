@@ -7,7 +7,7 @@ CREATE TABLE admin(
     password varchar(20) not null
 );
 
-CREATE TABLE pengguna(
+CREATE TABLE pengirim(
     id int not null primary key auto_increment,
     nama varchar(50) not null,
     alamat varchar(50) not null,
@@ -35,7 +35,6 @@ create TABLE resi(
     penerima int not null,
     paket int not null,
     waktuBerangkat varchar(50),
-    estimasiSampai varchar(50),
     status int not null default 0
 );
 

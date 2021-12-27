@@ -3,15 +3,16 @@ package controller;
 import entity.PengirimEntity;
 import entity.LoginEntity;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PengirirmController{
     
-    public ArrayList<PengirimEntity> getData(){
-        return AllObjModel.pengirimModel.getUser();
+    public List<PengirimEntity> getData(){
+        return AllObjModel.pengirimModel.getPengirim();
     }
     
-    public ArrayList<PengirimEntity> getData(int id){
-        return AllObjModel.pengirimModel.getUser(id);
+    public List<PengirimEntity> getData(int id){
+        return AllObjModel.pengirimModel.getPengirim(id);
     }
     
     public int insert(String nama, String alamat, String noTelp, String username, String password){

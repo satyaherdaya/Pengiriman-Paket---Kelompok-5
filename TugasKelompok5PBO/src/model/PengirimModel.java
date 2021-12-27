@@ -1,25 +1,22 @@
 package model;
 
+import entity.LoginEntity;
 import entity.PengirimEntity;
 import java.util.ArrayList;
 import java.sql.*;
+import java.util.List;
 
 public class PengirimModel extends AbstractClass{
-    public ArrayList<PengirimEntity> getUser(){
-        ArrayList<PengirimEntity> dataUser = new ArrayList<>();
+    private List<PengirimEntity> dataPengirim = new ArrayList();
+    
+    public List<PengirimEntity> getPengirim(){
+        List<PengirimEntity> dataUser = new ArrayList<>();
         try{
             Statement stat = conn.createStatement();
             sql = "SELECT * FROM user";
             ResultSet rs = stat.executeQuery(sql);
             while(rs.next()){
-                PengirimEntity user = new PengirimEntity();
-                user.setId(rs.getInt("id"));
-                user.setNama(rs.getString("nama"));
-                user.setAlamat(rs.getString("alamat"));
-                user.setNoTelp(rs.getString("noTelp"));
-                user.getLoginUser().setUsername(rs.getString("username"));
-                user.getLoginUser().setPassword(rs.getString("password"));
-                dataUser.add(user);
+                dataUser.add(new PengirimEntity(new LoginEntity(rs.getString("username"),rs.getString("password")),rs.getInt("id"),rs.getString("nama"),rs.getString("alamat"),rs.getString("noTelp")));
             }
         }catch(SQLException e){
             System.out.println(e);
@@ -27,7 +24,7 @@ public class PengirimModel extends AbstractClass{
         return dataUser;
     }
     
-    public ArrayList<PengirimEntity> getUser(int id){
+    public ArrayList<PengirimEntity> getPengirim(int id){
         ArrayList<PengirimEntity> arrayListUser = new ArrayList();
         try{
             sql = "SELECT * FROM pengguna where id=?";
@@ -35,20 +32,29 @@ public class PengirimModel extends AbstractClass{
             stat.setInt(1, id);
             ResultSet rs = stat.executeQuery();
             while(rs.next()){
-                PengirimEntity user = new PengirimEntity();
-                user.setId(rs.getInt("id"));
-                user.setNama(rs.getString("nama"));
-                user.setAlamat(rs.getString("alamat"));
-                user.setNoTelp(rs.getString("noTelp"));
-                user.getLoginUser().setUsername(rs.getString("username"));
-                user.getLoginUser().setPassword(rs.getString("password"));
-                user.setIdPaket(rs.getInt("paketId"));
-                arrayListUser.add(user);
+                arrayListUser.add(new PengirimEntity(new LoginEntity(rs.getString("username"),rs.getString("password")),rs.getInt("id"),rs.getString("nama"),rs.getString("alamat"),rs.getString("noTelp")));
             }
-        }catch(SQLException eSatya){
-            System.out.println(eSatya);
+        }catch(SQLException e){
+            System.out.println(e);
         }
         return arrayListUser;        
+    }
+    
+    public PengirimEntity getPengririmEntity(int id){
+        try{
+            sql = "SELECT * FROM pengguna where id=?";
+            PreparedStatement stat = conn.prepareStatement(sql);
+            stat.setInt(1, id);
+            ResultSet rs = stat.executeQuery();
+            while(rs.next()){
+                PengirimEntity pengirim = new PengirimEntity(new LoginEntity(rs.getString("username"),rs.getString("password")),rs.getInt("id"),rs.getString("nama"),rs.getString("alamat"),rs.getString("noTelp"));
+                dataPengirim.add(pengirim);
+                return pengirim;
+            }
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        return null;
     }
     
     public int insertUser(PengirimEntity pengirim){
@@ -146,8 +152,8 @@ public class PengirimModel extends AbstractClass{
             }else{
                 cek=0;
             }
-        }catch(SQLException eSatya){
-            eSatya.printStackTrace();
+        }catch(SQLException e){
+            e.printStackTrace();
         }
         return cek;
     }

@@ -6,15 +6,19 @@ public class PendudukEntity{
     protected String alamat;
     protected String noTelp;
     
-    public PendudukEntity() {
-    }
-
     public PendudukEntity(String nama, String alamat, String noTelp) {
         this.nama = nama;
         this.alamat = alamat;
         this.noTelp = noTelp;
     }
 
+    public PendudukEntity(int id, String nama, String alamat, String noTelp) {
+        this.id = id;
+        this.nama = nama;
+        this.alamat = alamat;
+        this.noTelp = noTelp;
+    }
+    
     public int getId() {
         return id;
     }

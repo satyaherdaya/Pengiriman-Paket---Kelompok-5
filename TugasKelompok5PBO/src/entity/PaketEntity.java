@@ -5,9 +5,13 @@ public class PaketEntity {
     private String namaPaket;
     private int beratPaket;
 
-    public PaketEntity(){
+    public PaketEntity(int id, String namaPaket, int beratPaket) {
+        this.id = id;
+        this.namaPaket = namaPaket;
+        this.beratPaket = beratPaket;
     }
 
+    
     public PaketEntity(String namaPaket, int beratPaket) {
         this.namaPaket = namaPaket;
         this.beratPaket = beratPaket;

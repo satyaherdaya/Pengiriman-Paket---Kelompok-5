@@ -1,24 +1,35 @@
 package entity;
 
+class StatusKirim{
+    public static final int SELESAI=1;
+}
+
 public class ResiEntity {
-    protected int id;
-    protected PaketEntity paket;
-    private PengirimEntity penduduk;
+    private int id;
+    private PengirimEntity pengirim;
     private PenerimaEntity penerima;
+    private PaketEntity paket;
     private String waktuBerangkat;
-    private String waktuSampai;
     private int status;
 
     public ResiEntity() {
         this.status=StatusKirim.SELESAI;
     }
 
-    public ResiEntity(PengirimEntity penduduk, PenerimaEntity penerima,PaketEntity paket, String waktuBerangkat, String waktuSampai) {
-        this.penduduk = penduduk;
+    public ResiEntity(PengirimEntity pengirim, PenerimaEntity penerima,PaketEntity paket, String waktuBerangkat) {
+        this.pengirim = pengirim;
         this.penerima = penerima;
         this.paket = paket;
         this.waktuBerangkat = waktuBerangkat;
-        this.waktuSampai = waktuSampai;
+    }
+
+    public ResiEntity(int id, PengirimEntity pengirim, PenerimaEntity penerima,PaketEntity paket, String waktuBerangkat, int status) {
+        this.id = id;
+        this.pengirim = pengirim;
+        this.penerima = penerima;
+        this.paket = paket;
+        this.waktuBerangkat = waktuBerangkat;
+        this.status = status;
     }
     
     public int getId() {
@@ -37,12 +48,12 @@ public class ResiEntity {
         this.paket = paket;
     }
 
-    public PengirimEntity getPenduduk() {
-        return penduduk;
+    public PengirimEntity getPengirim() {
+        return pengirim;
     }
 
-    public void setPenduduk(PengirimEntity penduduk) {
-        this.penduduk = penduduk;
+    public void setPengirim(PengirimEntity pengirim) {
+        this.pengirim = pengirim;
     }
 
     public PenerimaEntity getPenerima() {
@@ -59,14 +70,6 @@ public class ResiEntity {
 
     public void setWaktuBerangkat(String waktuBerangkat) {
         this.waktuBerangkat = waktuBerangkat;
-    }
-
-    public String getWaktuSampai() {
-        return waktuSampai;
-    }
-
-    public void setWaktuSampai(String waktuSampai) {
-        this.waktuSampai = waktuSampai;
     }
 
     public int getStatus() {

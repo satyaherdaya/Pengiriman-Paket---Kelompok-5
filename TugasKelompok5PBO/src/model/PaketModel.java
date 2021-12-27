@@ -3,8 +3,10 @@ package model;
 import entity.PaketEntity;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PaketModel extends AbstractClass{
+    private List<PaketEntity> dataPaket = new ArrayList();
     
     public int insert(PaketEntity paket){
         sql = "INSERT INTO paket(namaBarang,beratBarang) VALUES(?,?)";
@@ -19,8 +21,8 @@ public class PaketModel extends AbstractClass{
         }
     }
     
-    public ArrayList<PaketEntity> getPaket(int id){
-        ArrayList<PaketEntity> dataPaket = new ArrayList();
+    public List<PaketEntity> getPaket(int id){
+        List<PaketEntity> dataPaket = new ArrayList();
         
         try{
             sql = "SELECT * FROM paket WHERE id=?";
@@ -28,15 +30,29 @@ public class PaketModel extends AbstractClass{
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                PaketEntity paket = new PaketEntity();
-                paket.setId(rs.getInt("id"));
-                paket.setNamaPaket(rs.getString("namaBarang"));
-                paket.setBeratPaket(rs.getInt("beratPaket"));                
+                dataPaket.add(new PaketEntity(rs.getInt("id"),rs.getString("namaBarang"),rs.getInt("beratPaket")));
             }
         }catch(Exception e){
             e.printStackTrace();
         }
         return dataPaket;
+    }
+    
+    public PaketEntity getPaketEntity(int id){
+        try{
+            sql = "SELECT * FROM pengguna where id=?";
+            PreparedStatement stat = conn.prepareStatement(sql);
+            stat.setInt(1, id);
+            ResultSet rs = stat.executeQuery();
+            while(rs.next()){
+                PaketEntity paket = new PaketEntity(rs.getInt("id"),rs.getString("namaBarang"),rs.getInt("beratPaket"));
+                dataPaket.add(paket);
+                return paket;
+            }
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        return null;
     }
 
 }

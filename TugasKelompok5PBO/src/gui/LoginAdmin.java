@@ -8,7 +8,17 @@ import java.awt.event.MouseEvent;
 import javax.swing.*;
 
 public class LoginAdmin extends JFrame{
-    private ComponentGui cg = new ComponentGui();
+    JButton btnlogin = new JButton("Login");
+    JButton btnregister = new JButton("Regis");
+    JButton btnloginadmin = new JButton();
+    JButton btnloginuser = new JButton();
+    JButton btnupdatenama = new JButton("ubah");
+    JButton btnupdatealamat = new JButton("ubah");
+    JButton btnupdatenotelp = new JButton("ubah");
+    JLabel labelusername = new JLabel("Username");
+    JLabel labelpassword = new JLabel("Password");
+    JTextField tfusername = new JTextField();
+    JTextField tfpassword = new JTextField();
 
     public LoginAdmin() {
         initComponent();
@@ -23,40 +33,40 @@ public class LoginAdmin extends JFrame{
         setLayout(null);
         setVisible(true);
         
-        cg.labelusername.setBounds(35, 250, 40, 25);
-        add(cg.labelusername);
-        cg.tfusername.setBounds(130, 250, 130, 25);
-        add(cg.tfusername);
+        labelusername.setBounds(35, 250, 40, 25);
+        add(labelusername);
+        tfusername.setBounds(130, 250, 130, 25);
+        add(tfusername);
         
-        cg.labelpassword.setBounds(35,290,100,25);
-        add(cg.labelpassword);
-        cg.tfpassword.setBounds(130,290,130,25);
-        add(cg.tfpassword);
+        labelpassword.setBounds(35,290,100,25);
+        add(labelpassword);
+        tfpassword.setBounds(130,290,130,25);
+        add(tfpassword);
         
-        cg.btnlogin.setBounds(110, 350, 100, 25);
-        cg.btnlogin.setBackground(Color.black);
-        cg.btnlogin.setForeground(Color.white);
-        cg.btnlogin.setBorder(null);
-        add(cg.btnlogin);
+        btnlogin.setBounds(110, 350, 100, 25);
+        btnlogin.setBackground(Color.black);
+        btnlogin.setForeground(Color.white);
+        btnlogin.setBorder(null);
+        add(btnlogin);
         
-        cg.btnloginuser.setBounds(0, 405, 20, 20);
-        cg.btnloginuser.setBorder(null);
-        cg.btnloginuser.setBackground(Color.black);
-        add(cg.btnloginuser);
+        btnloginuser.setBounds(0, 405, 20, 20);
+        btnloginuser.setBorder(null);
+        btnloginuser.setBackground(Color.black);
+        add(btnloginuser);
         
-        cg.btnloginuser.addMouseListener(new MouseAdapter(){
+        btnloginuser.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseEntered(MouseEvent e){
-                cg.btnloginuser.setForeground(Color.blue);
+                btnloginuser.setForeground(Color.blue);
             }
             
             @Override
             public void mouseExited(MouseEvent e){
-                cg.btnloginuser.setForeground(Color.black);
+                btnloginuser.setForeground(Color.black);
             }
         });
         
-        cg.btnloginuser.addActionListener(new ActionListener(){
+        btnloginuser.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 dispose();
@@ -64,25 +74,25 @@ public class LoginAdmin extends JFrame{
             }
         });
         
-        cg.btnlogin.addMouseListener(new MouseAdapter(){
+        btnlogin.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseEntered(MouseEvent e){
-                cg.btnlogin.setForeground(Color.black);
-                cg.btnlogin.setBackground(Color.green);
+                btnlogin.setForeground(Color.black);
+                btnlogin.setBackground(Color.green);
             }
             
             @Override
             public void mouseExited(MouseEvent e){
-                cg.btnlogin.setForeground(Color.white);
-                cg.btnlogin.setBackground(Color.black);
+                btnlogin.setForeground(Color.white);
+                btnlogin.setBackground(Color.black);
             }
         });
         
-        cg.btnlogin.addActionListener(new ActionListener(){
+        btnlogin.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                String username = cg.tfusername.getText();
-                String password = cg.tfpassword.getText();
+                String username = tfusername.getText();
+                String password = tfpassword.getText();
                 int cek = AllObjController.adminController.cekLogin(username, password);
                 
                 if(cek>0){
@@ -91,9 +101,14 @@ public class LoginAdmin extends JFrame{
                     menuadmin.setVisible(true);
                 }else{
                     JOptionPane.showMessageDialog(null, "GAGAL LOGIN");
-                    cg.kosong();
+                    kosong();
                 }
             }
         });
+    }
+    
+    void kosong(){
+        tfusername.setText(null);
+        tfpassword.setText(null);
     }
 }

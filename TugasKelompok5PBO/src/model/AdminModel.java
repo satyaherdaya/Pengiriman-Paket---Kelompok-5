@@ -1,25 +1,21 @@
 package model;
 
 import entity.AdminEntity;
+import entity.LoginEntity;
+import entity.ResiEntity;
 import java.util.ArrayList;
 import java.sql.*;
+import java.util.List;
 
 public class AdminModel extends AbstractClass{
-    public ArrayList<AdminEntity> getAdmin(){
-        ArrayList<AdminEntity> dataAdmin = new ArrayList<>();
+    public List<AdminEntity> getAdmin(){
+        List<AdminEntity> dataAdmin = new ArrayList<>();
         try{
             Statement stat = conn.createStatement();
             sql = "SELECT * FROM admin";
             ResultSet rs = stat.executeQuery(sql);
             while(rs.next()){
-                AdminEntity admin = new AdminEntity();
-                admin.setId(rs.getInt("id"));
-                admin.setNama(rs.getString("nama"));
-                admin.setAlamat(rs.getString("alamat"));
-                admin.setNoTelp(rs.getString("noTelp"));
-                admin.loginAdmin.setUsername(rs.getString("username"));
-                admin.loginAdmin.setPassword(rs.getString("password"));
-                dataAdmin.add(admin);
+                dataAdmin.add(new AdminEntity(new LoginEntity(rs.getString("username"),rs.getString("password")),rs.getInt("id"),rs.getString("nama"),rs.getString("alamat"),rs.getString("noTelp")));
             }
         }catch(SQLException e){
             System.out.println(e);
@@ -27,22 +23,15 @@ public class AdminModel extends AbstractClass{
         return dataAdmin;
     }
     
-    public ArrayList<AdminEntity> getAdmin(int id){
-        ArrayList<AdminEntity> dataAdmin = new ArrayList<>();
+    public List<AdminEntity> getAdmin(int id){
+        List<AdminEntity> dataAdmin = new ArrayList<>();
         try{
             sql = "SELECT * FROM admin where id=?";
             PreparedStatement stat = conn.prepareStatement(sql);
             stat.setInt(1, id);
             ResultSet rs = stat.executeQuery();
             while(rs.next()){
-                AdminEntity admin = new AdminEntity();
-                admin.setId(rs.getInt("id"));
-                admin.setNama(rs.getString("nama"));
-                admin.setAlamat(rs.getString("alamat"));
-                admin.setNoTelp(rs.getString("noTelp"));
-                admin.loginAdmin.setUsername(rs.getString("username"));
-                admin.loginAdmin.setPassword(rs.getString("password"));
-                dataAdmin.add(admin);
+                dataAdmin.add(new AdminEntity(new LoginEntity(rs.getString("username"),rs.getString("password")),rs.getInt("id"),rs.getString("nama"),rs.getString("alamat"),rs.getString("noTelp")));
             }
         }catch(SQLException e){
             System.out.println(e);
@@ -50,15 +39,15 @@ public class AdminModel extends AbstractClass{
         return dataAdmin;
     }
     
-    public int insertAdmin(String nama,String alamat,String noTelp,String username,String password){
+    public int insertAdmin(AdminEntity admin){
         try{
             sql = "INSERT INTO admin(nama,alamat,noTelp,username,password) values(?,?,?,?,?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, nama);
-            stmt.setString(2, alamat);
-            stmt.setString(3, noTelp);
-            stmt.setString(4, username);
-            stmt.setString(5, password);
+            stmt.setString(1, admin.getNama());
+            stmt.setString(2, admin.getAlamat());
+            stmt.setString(3, admin.getNoTelp());
+            stmt.setString(4, admin.getLoginAdmin().getUsername());
+            stmt.setString(5, admin.getLoginAdmin().getPassword());
             return stmt.executeUpdate();
         }catch(SQLException e){
             e.printStackTrace();
@@ -66,11 +55,11 @@ public class AdminModel extends AbstractClass{
         }
     }
     
-    public int deleteAdmin(int id){
+    public int deleteAdmin(String nama){
         try{
-            sql = "DELETE FROM admin WHERE id=?";
+            sql = "DELETE FROM admin WHERE nama=?";
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, id);
+            stmt.setString(1, nama);
             return stmt.executeUpdate();
         }catch(SQLException e){
             e.printStackTrace();
@@ -105,6 +94,20 @@ public class AdminModel extends AbstractClass{
             sql = "UPDATE admin SET password=?, WHERE id=?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, password);
+            stmt.setInt(2, id);
+            return stmt.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+            return -1;
+        }
+    }
+    
+    public int verifResi(int id){
+        try{
+            sql = "UPDATE resi SET status=?, WHERE id=?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResiEntity resi = new ResiEntity();
+            stmt.setInt(1, resi.getStatus());
             stmt.setInt(2, id);
             return stmt.executeUpdate();
         }catch(SQLException e){

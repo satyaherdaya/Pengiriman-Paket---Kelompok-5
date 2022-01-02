@@ -30,7 +30,7 @@ public class ResiModel extends AbstractClass{
     public ArrayList<ResiEntity> getResi(int id){
         ArrayList<ResiEntity> dataPaket = new ArrayList();
         try{
-            sql = "SELECT * FROM paket WHERE id=?";
+            sql = "SELECT * FROM resi WHERE id=?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -47,7 +47,7 @@ public class ResiModel extends AbstractClass{
         ArrayList<ResiEntity> dataPaket = new ArrayList();
         
         try{
-            sql = "SELECT * FROM paket WHERE id=?";
+            sql = "SELECT * FROM resi";
             Statement ps = conn.createStatement();
             ResultSet rs = ps.executeQuery(sql);
             while(rs.next()){

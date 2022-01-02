@@ -24,12 +24,12 @@ public class RegisterAdmin extends JFrame{
     JTextField tfalamat = new JTextField();
     JTextField tfnotelp = new JTextField();
     
-    public RegisterAdmin() {
-        initComponent();
+    public RegisterAdmin(int cek) {
+        initComponent(cek);
     }
     
-    void initComponent(){
-        setTitle("Register Admin");
+    void initComponent(int cek){
+        setTitle("REGISTRASI ADMIN");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(320,480);
         setLocationRelativeTo(null);
@@ -66,24 +66,23 @@ public class RegisterAdmin extends JFrame{
         add(tfnotelp);
         
         btnaddadmin.setBounds(80, 350, 140, 25);
-        btnaddadmin.setBorder(null);
         btnaddadmin.setBackground(Color.black);
         btnaddadmin.setForeground(Color.white);
-        btnaddadmin.setFocusPainted(false);
+        btnaddadmin.setCursor(new Cursor(12));
         add(btnaddadmin);
         
         btnback.setBounds(30, 50, 70, 25);
         btnback.setBorder(null);
-        btnback.setBackground(Color.black);
-        btnback.setForeground(Color.white);
-        btnback.setFocusPainted(false);
+        btnback.setCursor(new Cursor(12));
+        btnback.setBackground(Color.white);
+        btnback.setForeground(Color.black);
         add(btnback);
         
         btnaddadmin.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseEntered(MouseEvent e){
-                btnaddadmin.setForeground(Color.black);
-                btnaddadmin.setBackground(Color.green);
+                btnaddadmin.setForeground(Color.blue);
+                btnaddadmin.setBackground(Color.white);
             }
             
             @Override
@@ -105,11 +104,32 @@ public class RegisterAdmin extends JFrame{
                 if(username.length()!=0 && password.length()!=0 && nama.length()!=0 && alamat.length()!=0 && noTelp.length()!=0){
                     AllObjController.adminController.insert(new AdminEntity(new LoginEntity(username,password),nama,alamat,noTelp));
                     JOptionPane.showMessageDialog(null, nama + "adalah Admin");
+                    new MenuAdmin(cek).setVisible(true);
                     dispose();
                 }else{
                     JOptionPane.showMessageDialog(null, "Data Tidak Boleh Kosong");
                     kosong();
                 }
+            }
+        });
+        
+        btnback.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseEntered(MouseEvent e){
+                btnback.setForeground(Color.blue);
+            }
+            
+            @Override
+            public void mouseExited(MouseEvent e){
+                btnback.setForeground(Color.black);
+            }
+        });
+        
+        btnback.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new MenuAdmin(cek).setVisible(true);
+                dispose();
             }
         });
     }

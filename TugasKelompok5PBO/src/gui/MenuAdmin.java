@@ -8,135 +8,64 @@ import java.awt.event.MouseEvent;
 import javax.swing.*;
 
 public class MenuAdmin extends JFrame{
-    private int kode;
+    JLabel labeljudul = new JLabel("MENU ADMIN");
     JButton btnaddadmin = new JButton("Register Admin");
-    JButton btnverfpengiriman = new JButton("Ubah Status");
-    JButton btnlogout = new JButton("Lihat Data");
+    JButton btnviewtransaksi = new JButton("View Transaksi");
+    JButton btnlogout = new JButton("<<Logout");
     JButton btnupdatepass = new JButton("Ubah Password");
-    JButton btndeleteadmin = new JButton("Delete Admin");    
-    JButton btnback = new JButton("<<back");
-    JTable tabelresi = new JTable();
-    JScrollPane spresi = new JScrollPane(tabelresi);
-    JTextField textpilih = new JTextField();
+    JButton btnviewadmin = new JButton("View Admin");
     
     public MenuAdmin(int cek) {
         initComponent(cek);
     }
     
     void initComponent(int cek){
-        setTitle("PROGRAM VERIF MAHASISWA");
+        setTitle("MENU ADMIN");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(700,480);
+        setSize(640,480);
         setLocationRelativeTo(null);
         getContentPane().setBackground(Color.white);
         setLayout(null);
         setVisible(true);
         
-        spresi.setBounds(20, 50, 1200, 350);
-        tabelresi.setModel(AllObjController.resiController.dataResi());
-        tabelresi.setDefaultEditor(Object.class, null);
-        add(spresi);
+        labeljudul.setBounds(240, 60, 200, 25);
+        labeljudul.setFont(new Font("Segoe Print",1,20));
+        add(labeljudul);
         
-        btnverfpengiriman.setBounds(1250, 50, 110, 25);
-        btnverfpengiriman.setFocusPainted(false);
-        btnverfpengiriman.setBorder(null);
-        btnverfpengiriman.setCursor(new Cursor(12));
-        btnverfpengiriman.setBackground(Color.black);
-        btnverfpengiriman.setForeground(Color.white);
-        add(btnverfpengiriman);
-        
-        btnupdatepass.setBounds(1250, 50, 110, 25);
-        btnupdatepass.setFocusPainted(false);
-        btnupdatepass.setBorder(null);
-        btnupdatepass.setCursor(new Cursor(12));
-        btnupdatepass.setBackground(Color.black);
-        btnupdatepass.setForeground(Color.white);
-        add(btnupdatepass);
-        
-        btnback.setBounds(25, 20, 80, 25);
-        btnback.setBackground(Color.white);
-        btnback.setCursor(new Cursor(12));
-        btnback.setFocusPainted(false);
-        btnback.setBorder(null);
-        add(btnback);
-        
-        btnaddadmin.setBounds(1250, 100, 110, 25);
-        btnaddadmin.setFocusPainted(false);
-        btnaddadmin.setBorder(null);
+        btnaddadmin.setBounds(140, 150, 140, 100);
         btnaddadmin.setCursor(new Cursor(12));
         btnaddadmin.setBackground(Color.black);
         btnaddadmin.setForeground(Color.white);
         add(btnaddadmin);
         
-        btndeleteadmin.setBounds(1250, 100, 110, 25);
-        btndeleteadmin.setFocusPainted(false);
-        btndeleteadmin.setBorder(null);
-        btndeleteadmin.setCursor(new Cursor(12));
-        btndeleteadmin.setBackground(Color.black);
-        btndeleteadmin.setForeground(Color.white);
-        add(btndeleteadmin);
+        btnviewtransaksi.setBounds(320, 150, 140, 100);
+        btnviewtransaksi.setCursor(new Cursor(12));
+        btnviewtransaksi.setBackground(Color.black);
+        btnviewtransaksi.setForeground(Color.white);
+        add(btnviewtransaksi);
         
-        tabelresi.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseClicked(MouseEvent e){
-                int i = tabelresi.getSelectedRow();
-                textpilih.setText(AllObjController.resiController.dataResi().getValueAt(i, 0).toString());
-            }
-        });
+        btnviewadmin.setBounds(140, 270, 140, 100);
+        btnviewadmin.setCursor(new Cursor(12));
+        btnviewadmin.setBackground(Color.black);
+        btnviewadmin.setForeground(Color.white);
+        add(btnviewadmin);
         
-        btnverfpengiriman.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e){
-                kode = Integer.parseInt(textpilih.getText());
-                AllObjController.adminController.verifResi(kode);
-                JOptionPane.showMessageDialog(null, "Berhasil Verifikasi");
-                tabelresi.setModel(AllObjController.resiController.dataResi());
-            }
-        });
+        btnupdatepass.setBounds(320, 270, 140, 100);
+        btnupdatepass.setCursor(new Cursor(12));
+        btnupdatepass.setBackground(Color.black);
+        btnupdatepass.setForeground(Color.white);
+        add(btnupdatepass);
         
-        btndeleteadmin.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e){
-                try{
-                    String inputNama = JOptionPane.showInputDialog("Masukkan Nama Admin yang akan di Hapus");
-                    if(inputNama.length()>0){
-                        AllObjController.adminController.delete(inputNama);
-                        JOptionPane.showMessageDialog(null, "Berhasil Delete Admin");
-                    }else{
-                        JOptionPane.showMessageDialog(null, "Data Kosong");
-                    }
-                }catch(Exception exSatya){
-                    JOptionPane.showMessageDialog(null, "Cancelled");
-                }
-            }
-        });
-        
-        btnback.addMouseListener(new MouseAdapter(){
-            @Override
-            public void mouseEntered(MouseEvent e){
-                btnback.setForeground(Color.yellow);
-            }
-            
-            @Override
-            public void mouseExited(MouseEvent e){
-                btnback.setForeground(Color.black);
-            }
-        });
-        
-        btnback.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                LoginAdmin loginAdmin = new LoginAdmin();
-                loginAdmin.setVisible(true);
-                dispose();
-            }
-        });
+        btnlogout.setBounds(25, 20, 80, 25);
+        btnlogout.setBackground(Color.white);
+        btnlogout.setCursor(new Cursor(12));
+        btnlogout.setBorder(null);
+        add(btnlogout);
         
         btnupdatepass.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
                 try{
-                    
                     String inputpass = JOptionPane.showInputDialog("Masukkan Password Baru");
                     if(inputpass.length()>0){
                         AllObjController.adminController.updatePassword(cek,inputpass);
@@ -153,9 +82,101 @@ public class MenuAdmin extends JFrame{
         btnaddadmin.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                RegisterAdmin registerAdmin =  new RegisterAdmin();
-                registerAdmin.setVisible(true);
+                new RegisterAdmin(cek).setVisible(true);
                 dispose();                
+            }
+        });
+        
+        btnlogout.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseEntered(MouseEvent e){
+                btnlogout.setForeground(Color.blue);
+            }
+            
+            @Override
+            public void mouseExited(MouseEvent e){
+                btnlogout.setForeground(Color.black);
+            }
+        });
+        
+        btnlogout.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LoginAdmin loginAdmin = new LoginAdmin();
+                loginAdmin.setVisible(true);
+                dispose();
+            }
+        });
+        
+        btnviewtransaksi.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new VerifTransaksi(cek).setVisible(true);
+                dispose();
+            }
+        });
+        
+        btnviewadmin.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ViewAdmin(cek).setVisible(true);
+                dispose();
+            }
+        });
+    
+        btnupdatepass.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseEntered(MouseEvent e){
+                btnupdatepass.setBackground(Color.white);
+                btnupdatepass.setForeground(Color.blue);
+            }
+            
+            @Override
+            public void mouseExited(MouseEvent e){
+                btnupdatepass.setBackground(Color.black);
+                btnupdatepass.setForeground(Color.white);
+            }
+        });
+        
+        btnaddadmin.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseEntered(MouseEvent e){
+                btnaddadmin.setBackground(Color.white);
+                btnaddadmin.setForeground(Color.blue);
+            }
+            
+            @Override
+            public void mouseExited(MouseEvent e){
+                btnaddadmin.setBackground(Color.black);
+                btnaddadmin.setForeground(Color.white);
+            }
+        });
+        
+        btnviewtransaksi.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseEntered(MouseEvent e){
+                btnviewtransaksi.setBackground(Color.white);
+                btnviewtransaksi.setForeground(Color.blue);
+            }
+            
+            @Override
+            public void mouseExited(MouseEvent e){
+                btnviewtransaksi.setBackground(Color.black);
+                btnviewtransaksi.setForeground(Color.white);
+            }
+        });
+        
+        btnviewadmin.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseEntered(MouseEvent e){
+                btnviewadmin.setBackground(Color.white);
+                btnviewadmin.setForeground(Color.blue);
+            }
+            
+            @Override
+            public void mouseExited(MouseEvent e){
+                btnviewadmin.setBackground(Color.black);
+                btnviewadmin.setForeground(Color.white);
             }
         });
     }

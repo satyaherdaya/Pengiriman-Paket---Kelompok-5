@@ -18,14 +18,14 @@ public class LoginAdmin extends JFrame{
     JLabel labelusername = new JLabel("Username");
     JLabel labelpassword = new JLabel("Password");
     JTextField tfusername = new JTextField();
-    JTextField tfpassword = new JTextField();
+    JPasswordField pfpassword = new JPasswordField();
 
     public LoginAdmin() {
         initComponent();
     }
     
     void initComponent(){
-        setTitle("Login");
+        setTitle("LOGIN ADMIN");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(320,480);
         setLocationRelativeTo(null);
@@ -33,20 +33,20 @@ public class LoginAdmin extends JFrame{
         setLayout(null);
         setVisible(true);
         
-        labelusername.setBounds(35, 250, 40, 25);
+        labelusername.setBounds(35, 250, 80, 25);
         add(labelusername);
         tfusername.setBounds(130, 250, 130, 25);
         add(tfusername);
         
         labelpassword.setBounds(35,290,100,25);
         add(labelpassword);
-        tfpassword.setBounds(130,290,130,25);
-        add(tfpassword);
+        pfpassword.setBounds(130,290,130,25);
+        add(pfpassword);
         
         btnlogin.setBounds(110, 350, 100, 25);
         btnlogin.setBackground(Color.black);
         btnlogin.setForeground(Color.white);
-        btnlogin.setBorder(null);
+        btnlogin.setCursor(new Cursor(12));
         add(btnlogin);
         
         btnloginuser.setBounds(0, 405, 20, 20);
@@ -78,7 +78,7 @@ public class LoginAdmin extends JFrame{
             @Override
             public void mouseEntered(MouseEvent e){
                 btnlogin.setForeground(Color.black);
-                btnlogin.setBackground(Color.green);
+                btnlogin.setBackground(Color.yellow);
             }
             
             @Override
@@ -92,7 +92,7 @@ public class LoginAdmin extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 String username = tfusername.getText();
-                String password = tfpassword.getText();
+                String password = pfpassword.getText();
                 int cek = AllObjController.adminController.cekLogin(username, password);
                 
                 if(cek>0){
@@ -109,6 +109,6 @@ public class LoginAdmin extends JFrame{
     
     void kosong(){
         tfusername.setText(null);
-        tfpassword.setText(null);
+        pfpassword.setText(null);
     }
 }

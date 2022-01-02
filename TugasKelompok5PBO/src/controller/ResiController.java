@@ -20,9 +20,9 @@ public class ResiController {
     }
     
     public DefaultTableModel dataResi(){
-        DefaultTableModel dataResi = new DefaultTableModel();
+        DefaultTableModel listDataResi = new DefaultTableModel();
         Object[] kolom = {"ID","ID PENGIRIM","NAMA PENGIRIM","ALAMAT PENGIRIM","NO TELP PENGIRIM","ID PENERIMA","NAMA PENERIMA","ALAMAT PENERIMA","NO TELP PENERIMA","ID PAKET","NAMA PAKET","BERAT PAKET","WAKTU BERANGKAT","STATUS"};
-        dataResi.setColumnIdentifiers(kolom);
+        listDataResi.setColumnIdentifiers(kolom);
         
         int sizeSatya = getData().size();
         for(int iSatya = 0;iSatya<sizeSatya;iSatya++){
@@ -41,8 +41,8 @@ public class ResiController {
             data[11] = AllObjModel.resiModel.getResi().get(iSatya).getPaket().getBeratPaket();
             data[12] = AllObjModel.resiModel.getResi().get(iSatya).getWaktuBerangkat();
             data[13] = AllObjModel.resiModel.getResi().get(iSatya).getStatus();
-            dataResi.addRow(data);
+            listDataResi.addRow(data);
         }
-        return dataResi;
+        return listDataResi;
     }
 }

@@ -55,11 +55,11 @@ public class AdminModel extends AbstractClass{
         }
     }
     
-    public int deleteAdmin(String nama){
+    public int deleteAdmin(int id){
         try{
-            sql = "DELETE FROM admin WHERE nama=?";
+            sql = "DELETE FROM admin WHERE id=?";
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, nama);
+            stmt.setInt(1, id);
             return stmt.executeUpdate();
         }catch(SQLException e){
             e.printStackTrace();
@@ -70,7 +70,7 @@ public class AdminModel extends AbstractClass{
     public int cekLogin(String username, String password) {
         int cek = 0;
         try{
-            sql = "SELECT * From kurir WHERE username=? and password=?";
+            sql = "SELECT * From admin WHERE username=? and password=?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, username);
             stmt.setString(2, password);
@@ -94,6 +94,45 @@ public class AdminModel extends AbstractClass{
             sql = "UPDATE admin SET password=?, WHERE id=?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, password);
+            stmt.setInt(2, id);
+            return stmt.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+            return -1;
+        }
+    }
+    
+    public int updateNamaAdmin(int id, String nama){
+        try{
+            sql = "UPDATE admin SET nama=?, WHERE id=?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, nama);
+            stmt.setInt(2, id);
+            return stmt.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+            return -1;
+        }
+    }
+    
+    public int updateAlamatAdmin(int id, String alamat){
+        try{
+            sql = "UPDATE admin SET alamat=?, WHERE id=?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, alamat);
+            stmt.setInt(2, id);
+            return stmt.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+            return -1;
+        }
+    }
+    
+    public int updateNoTelpAdmin(int id, String noTelp){
+        try{
+            sql = "UPDATE admin SET noTelp=?, WHERE id=?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, noTelp);
             stmt.setInt(2, id);
             return stmt.executeUpdate();
         }catch(SQLException e){

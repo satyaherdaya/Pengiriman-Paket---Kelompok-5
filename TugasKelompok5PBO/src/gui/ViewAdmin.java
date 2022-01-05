@@ -67,6 +67,7 @@ public class ViewAdmin extends JFrame{
             public void actionPerformed(ActionEvent e){
                 kode = Integer.parseInt(textpilih.getText());
                 new UpdateDataAdmin(kode).setVisible(true);
+                dispose();
             }
         });
         

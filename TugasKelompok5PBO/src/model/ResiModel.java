@@ -27,10 +27,10 @@ public class ResiModel extends AbstractClass{
         }
     }
     
-    public ArrayList<ResiEntity> getResi(int id){
+    public ArrayList<ResiEntity> getResibyPengirim(int id){
         ArrayList<ResiEntity> dataPaket = new ArrayList();
         try{
-            sql = "SELECT * FROM resi WHERE id=?";
+            sql = "SELECT * FROM resi WHERE pembeli in (?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();

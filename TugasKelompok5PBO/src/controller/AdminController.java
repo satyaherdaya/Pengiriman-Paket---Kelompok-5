@@ -52,13 +52,13 @@ public class AdminController{
         Object[] kolom = {"ID","NAMA","ALAMAT","NO TELP"};
         listDataAdmin.setColumnIdentifiers(kolom);
         
-        int sizeSatya = getData().size();
-        for(int iSatya = 0;iSatya<sizeSatya;iSatya++){
+        int size = getData().size();
+        for(int i = 0;i<size;i++){
             Object[] data = new Object[14];
-            data[0] = AllObjModel.adminModel.getAdmin().get(iSatya).getId();
-            data[1] = AllObjModel.adminModel.getAdmin().get(iSatya).getNama();
-            data[2] = AllObjModel.adminModel.getAdmin().get(iSatya).getAlamat();
-            data[3] = AllObjModel.adminModel.getAdmin().get(iSatya).getNoTelp();
+            data[0] = AllObjModel.adminModel.getAdmin().get(i).getId();
+            data[1] = AllObjModel.adminModel.getAdmin().get(i).getNama();
+            data[2] = AllObjModel.adminModel.getAdmin().get(i).getAlamat();
+            data[3] = AllObjModel.adminModel.getAdmin().get(i).getNoTelp();
             listDataAdmin.addRow(data);
         }
         return listDataAdmin;

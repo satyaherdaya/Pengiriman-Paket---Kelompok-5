@@ -40,7 +40,7 @@ public class RegisterAdmin extends JFrame{
         labeljudul.setBounds(120, 50, 130, 25);
         add(labeljudul);
         
-        labelusername.setBounds(30, 100, 40, 25);
+        labelusername.setBounds(30, 100, 80, 25);
         add(labelusername);
         tfusername.setBounds(130, 100, 130, 25);
         add(tfusername);
@@ -103,7 +103,7 @@ public class RegisterAdmin extends JFrame{
                 
                 if(username.length()!=0 && password.length()!=0 && nama.length()!=0 && alamat.length()!=0 && noTelp.length()!=0){
                     AllObjController.adminController.insert(new AdminEntity(new LoginEntity(username,password),nama,alamat,noTelp));
-                    JOptionPane.showMessageDialog(null, nama + "adalah Admin");
+                    JOptionPane.showMessageDialog(null, nama + " adalah Admin");
                     new MenuAdmin(cek).setVisible(true);
                     dispose();
                 }else{

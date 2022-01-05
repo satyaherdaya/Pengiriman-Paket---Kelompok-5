@@ -5,18 +5,27 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class LoginUser extends JFrame{
+    BufferedImage bufferedImage = null;
+    Image gambarresize;
+    String pathicon;
     JButton btnlogin = new JButton("Login");
-    JButton btnregister = new JButton("Regis");
+    JButton btnregister = new JButton("Buat Akun Baru?");
     JButton btnloginadmin = new JButton();
-    JButton btnloginuser = new JButton();
     JButton btnupdatenama = new JButton("ubah");
     JButton btnupdatealamat = new JButton("ubah");
     JButton btnupdatenotelp = new JButton("ubah");
     JLabel labelusername = new JLabel("Username");
     JLabel labelpassword = new JLabel("Password");
+    JLabel labelbingkai = new JLabel();
     JTextField tfusername = new JTextField();
     JPasswordField pfpassword = new JPasswordField();
     
@@ -53,6 +62,44 @@ public class LoginUser extends JFrame{
         btnloginadmin.setBorder(null);
         btnloginadmin.setBackground(Color.black);
         add(btnloginadmin);
+        
+        btnregister.setBounds(85, 400, 150, 25);
+        btnregister.setFont(new Font("",1,14));
+        btnregister.setBackground(Color.white);
+        btnregister.setBorder(null);
+        btnregister.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        add(btnregister);
+        
+        labelbingkai.setBounds(80, 70, 150, 150);
+        add(labelbingkai);
+        
+        pathicon = "./src/image/biru.png";
+        
+        try{
+            bufferedImage = ImageIO.read(new File(pathicon));
+        } catch (IOException ex) {
+            Logger.getLogger(LoginUser.class.getName()).log(Level.SEVERE, null,ex);
+        }
+        
+        gambarresize = bufferedImage.getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+        labelbingkai.setIcon(new ImageIcon(gambarresize));
+        
+        btnregister.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseEntered(MouseEvent e){
+                btnregister.setForeground(Color.blue);
+            }
+            
+            @Override
+            public void mouseExited(MouseEvent e){
+                btnregister.setForeground(Color.black);
+            }
+        });
+        
+        btnregister.addActionListener(e->{
+            new RegisterUser().setVisible(true);
+            dispose();
+        });
         
         btnlogin.addMouseListener(new MouseAdapter(){
             @Override

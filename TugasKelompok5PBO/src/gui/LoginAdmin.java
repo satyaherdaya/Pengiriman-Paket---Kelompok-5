@@ -5,9 +5,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class LoginAdmin extends JFrame{
+    BufferedImage bufferedImage = null;
+    Image gambarresize;
+    String pathicon;
     JButton btnlogin = new JButton("Login");
     JButton btnregister = new JButton("Regis");
     JButton btnloginadmin = new JButton();
@@ -17,6 +26,7 @@ public class LoginAdmin extends JFrame{
     JButton btnupdatenotelp = new JButton("ubah");
     JLabel labelusername = new JLabel("Username");
     JLabel labelpassword = new JLabel("Password");
+    JLabel labelbingkai = new JLabel();
     JTextField tfusername = new JTextField();
     JPasswordField pfpassword = new JPasswordField();
 
@@ -53,6 +63,20 @@ public class LoginAdmin extends JFrame{
         btnloginuser.setBorder(null);
         btnloginuser.setBackground(Color.black);
         add(btnloginuser);
+
+        labelbingkai.setBounds(80, 70, 150, 150);
+        add(labelbingkai);
+        
+        pathicon = "./src/image/merah.png";
+        
+        try{
+            bufferedImage = ImageIO.read(new File(pathicon));
+        } catch (IOException ex) {
+            Logger.getLogger(LoginUser.class.getName()).log(Level.SEVERE, null,ex);
+        }
+        
+        gambarresize = bufferedImage.getScaledInstance(150, 150, Image.SCALE_SMOOTH);
+        labelbingkai.setIcon(new ImageIcon(gambarresize));
         
         btnloginuser.addMouseListener(new MouseAdapter(){
             @Override

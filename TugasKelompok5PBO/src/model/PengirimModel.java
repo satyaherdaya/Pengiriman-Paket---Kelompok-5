@@ -114,7 +114,7 @@ public class PengirimModel extends AbstractClass{
     
     public int updatePassUser(int id,String password){
         try{
-            sql = "UPDATE pengguna SET password=?, WHERE id=?";
+            sql = "UPDATE pengguna SET password=? WHERE id=?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, password);
             stmt.setInt(2, id);

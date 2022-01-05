@@ -54,5 +54,4 @@ public class PaketModel extends AbstractClass{
         }
         return null;
     }
-
 }

@@ -4,13 +4,14 @@ import entity.AdminEntity;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.*;
 
 
 public class UpdateDataAdmin extends JFrame{
-    JButton btnaddadmin = new JButton("Register Admin");
     JButton btnback = new JButton("<<back");
-    JLabel labeljudul = new JLabel("Registrasi Admin");
+    JLabel labeljudul = new JLabel("Ubah Data Admin");
     JLabel labelid = new JLabel("Id");
     JLabel labelnama = new JLabel("Nama");
     JLabel labelalamat = new JLabel("Alamat");
@@ -85,6 +86,32 @@ public class UpdateDataAdmin extends JFrame{
         add(btnupdatenama);
         add(btnupdatealamat);
         add(btnupdatenotelp);
+        
+        btnback.setBounds(25, 20, 80, 25);
+        btnback.setBackground(Color.white);
+        btnback.setCursor(new Cursor(12));
+        btnback.setBorder(null);
+        add(btnback);
+        
+        btnback.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseEntered(MouseEvent e){
+                btnback.setForeground(Color.blue);
+            }
+            
+            @Override
+            public void mouseExited(MouseEvent e){
+                btnback.setForeground(Color.black);
+            }
+        });
+        
+        btnback.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ViewAdmin(cek).setVisible(true);
+                dispose();
+            }
+        });
         
         btnupdatenama.addActionListener(new ActionListener(){
             @Override

@@ -15,8 +15,12 @@ public class PengirirmController{
         return AllObjModel.pengirimModel.getPengirim(id);
     }
     
-    public int insert(String nama, String alamat, String noTelp, String username, String password){
-        return AllObjModel.pengirimModel.insertUser(new PengirimEntity(new LoginEntity(username, password),nama, alamat, noTelp));
+    public PengirimEntity getPengirim(int id){
+        return AllObjModel.pengirimModel.getPengririmEntity(id);
+    }
+    
+    public int insert(PengirimEntity pengirim){
+        return AllObjModel.pengirimModel.insertUser(pengirim);
     }
     
     public int updateNamaUser(int id, String nama){

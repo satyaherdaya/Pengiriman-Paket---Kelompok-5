@@ -7,7 +7,7 @@ import entity.ResiEntity;
 import java.util.ArrayList;
 import java.sql.*;
 
-public class ResiModel extends AbstractClass{
+public class ResiModel extends KoneksiDataBase implements AmbilSatuData<ResiEntity>{
     private PengirimModel pengirimModel = new PengirimModel();
     private PenerimaModel penerimaModel = new PenerimaModel();
     private PaketModel paketModel = new PaketModel();
@@ -22,12 +22,13 @@ public class ResiModel extends AbstractClass{
             ps.setString(4,resi.getWaktuBerangkat());
             return ps.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Tabel Tidak Diemukan");
             return -1;
         }
     }
     
-    public ArrayList<ResiEntity> getResibyPengirim(int id){
+    @Override
+    public ArrayList<ResiEntity> ambilSatuData(int id){
         ArrayList<ResiEntity> dataPaket = new ArrayList();
         try{
             sql = "SELECT * FROM resi WHERE pembeli in (?)";
@@ -38,7 +39,7 @@ public class ResiModel extends AbstractClass{
                 dataPaket.add(new ResiEntity(rs.getInt("id"),pengirimModel.getPengririmEntity(rs.getInt("pengirim")), penerimaModel.getPenerimaEntity(rs.getInt("penerima")),paketModel.getPaketEntity(rs.getInt("paket")), rs.getString("waktiBerangkat"), rs.getInt("status")));
             }
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println("Id Tidak Diemukan");
         }
         return dataPaket;
     }
@@ -54,7 +55,7 @@ public class ResiModel extends AbstractClass{
                 dataPaket.add(new ResiEntity(rs.getInt("id"),pengirimModel.getPengririmEntity(rs.getInt("pengirim")), penerimaModel.getPenerimaEntity(rs.getInt("penerima")),paketModel.getPaketEntity(rs.getInt("paket")), rs.getString("waktiBerangkat"), rs.getInt("status")));
             }
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println("Id Tidak Diemukan");
         }
         return dataPaket;
     }

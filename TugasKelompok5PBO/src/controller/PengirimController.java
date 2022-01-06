@@ -1,18 +1,17 @@
 package controller;
 
 import entity.PengirimEntity;
-import entity.LoginEntity;
-import java.util.ArrayList;
 import java.util.List;
 
-public class PengirirmController{
+public class PengirimController implements AmbilSatuData<PengirimEntity>,HapusAkun{
     
     public List<PengirimEntity> getData(){
-        return AllObjModel.pengirimModel.getPengirim();
+        return AllObjModel.pengirimModel.getAllPengirim();
     }
     
-    public List<PengirimEntity> getData(int id){
-        return AllObjModel.pengirimModel.getPengirim(id);
+    @Override
+    public List<PengirimEntity> ambilSatuData(int id){
+        return AllObjModel.pengirimModel.ambilSatuData(id);
     }
     
     public PengirimEntity getPengirim(int id){
@@ -39,8 +38,9 @@ public class PengirirmController{
         return AllObjModel.pengirimModel.updatePassUser(id, password);
     }
     
-    public int delete(int id){
-        return AllObjModel.pengirimModel.deleteUser(id);
+    @Override
+    public int hapusAkun(int id){
+        return AllObjModel.pengirimModel.hapusAkun(id);
     }
     
     public int cekLogin(String username, String password){

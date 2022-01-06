@@ -9,7 +9,7 @@ public class ResiEntity {
     private PengirimEntity pengirim;
     private PenerimaEntity penerima;
     private PaketEntity paket;
-    private String waktuBerangkat;
+    private String estimasiSampai;
     private int status;
 
     public ResiEntity() {
@@ -20,15 +20,15 @@ public class ResiEntity {
         this.pengirim = pengirim;
         this.penerima = penerima;
         this.paket = paket;
-        this.waktuBerangkat = waktuBerangkat;
+        this.estimasiSampai = waktuBerangkat;
     }
 
-    public ResiEntity(int id, PengirimEntity pengirim, PenerimaEntity penerima,PaketEntity paket, String waktuBerangkat, int status) {
+    public ResiEntity(int id, PengirimEntity pengirim, PenerimaEntity penerima,PaketEntity paket, String estimasiSampai, int status) {
         this.id = id;
         this.pengirim = pengirim;
         this.penerima = penerima;
         this.paket = paket;
-        this.waktuBerangkat = waktuBerangkat;
+        this.estimasiSampai = estimasiSampai;
         this.status = status;
     }
     
@@ -65,11 +65,11 @@ public class ResiEntity {
     }
 
     public String getWaktuBerangkat() {
-        return waktuBerangkat;
+        return estimasiSampai;
     }
 
-    public void setWaktuBerangkat(String waktuBerangkat) {
-        this.waktuBerangkat = waktuBerangkat;
+    public void setWaktuBerangkat(String estimasiSampai) {
+        this.estimasiSampai = estimasiSampai;
     }
 
     public int getStatus() {

@@ -1,5 +1,7 @@
 package gui;
 
+import controller.AmbilSatuData;
+import controller.HapusAkun;
 import entity.PengirimEntity;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -22,16 +24,19 @@ public class ProfileUser extends JFrame{
     JButton btnupdatenama = new JButton("Ubah");
     JButton btnupdatealamat = new JButton("Ubah");
     JButton btnupdatenotelp = new JButton("Ubah");
+    JButton btnhapusakun = new JButton("Hapus Akun?");
     
     int id;
     String nama,alamat,notelp;
+    
+    AmbilSatuData<PengirimEntity> ambilSatuData = AllObjController.pengirimController;
     
     public ProfileUser(int cek) {
         initComponent(cek);
     }
     
     void initComponent(int cek){
-        for(PengirimEntity pengirim : AllObjController.pengirimController.getData(cek)){
+        for(PengirimEntity pengirim : ambilSatuData.ambilSatuData(cek)){
             this.id=pengirim.getId();
             this.nama=pengirim.getNama();
             this.alamat=pengirim.getAlamat();
@@ -124,7 +129,7 @@ public class ProfileUser extends JFrame{
                     }else{
                         JOptionPane.showMessageDialog(null, "Data Kosong");
                     }
-                }catch(Exception exSatya){
+                }catch(Exception ex){
                     JOptionPane.showMessageDialog(null, "Cancelled");
                 }
             }
@@ -141,7 +146,7 @@ public class ProfileUser extends JFrame{
                     }else{
                         JOptionPane.showMessageDialog(null, "Data Kosong");
                     }
-                }catch(Exception exSatya){
+                }catch(Exception ex){
                     JOptionPane.showMessageDialog(null, "Cancelled");
                 }
             }
@@ -161,6 +166,17 @@ public class ProfileUser extends JFrame{
                 }catch(Exception exSatya){
                     JOptionPane.showMessageDialog(null, "Cancelled");
                 }
+            }
+        });
+        
+        btnhapusakun.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                HapusAkun hapusAkun = AllObjController.pengirimController;
+                hapusAkun.hapusAkun(cek);
+                JOptionPane.showMessageDialog(null, "Akun Telah DIhapus");
+                new LoginUser().setVisible(true);
+                dispose();
             }
         });
     }

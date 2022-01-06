@@ -1,5 +1,6 @@
 package gui;
 
+import controller.AmbilSatuData;
 import entity.AdminEntity;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -27,11 +28,13 @@ public class UpdateDataAdmin extends JFrame{
     int id;
     String nama,alamat,notelp;
     
+    AmbilSatuData<AdminEntity> ambilSatuData = AllObjController.adminController;
+    
     public UpdateDataAdmin(int cek) {
         initComponent(cek);
     }
     void initComponent(int cek){
-        for(AdminEntity admin : AllObjController.adminController.getData(cek)){
+        for(AdminEntity admin : ambilSatuData.ambilSatuData(cek)){
             this.id=admin.getId();
             this.nama=admin.getNama();
             this.alamat=admin.getAlamat();

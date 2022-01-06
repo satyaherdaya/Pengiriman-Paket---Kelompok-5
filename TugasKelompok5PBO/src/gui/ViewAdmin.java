@@ -1,5 +1,6 @@
 package gui;
 
+import controller.HapusAkun;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -75,8 +76,11 @@ public class ViewAdmin extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e){
                 kode = Integer.parseInt(textpilih.getText());
-                AllObjController.adminController.delete(kode);
-                tabelresi.setModel(AllObjController.adminController.dataAdmin());
+                HapusAkun hapusAkun = AllObjController.adminController;
+                hapusAkun.hapusAkun(cek);
+                JOptionPane.showMessageDialog(null, "Akun Telah DIhapus");
+                new LoginUser().setVisible(true);
+                dispose();
             }
         });
         

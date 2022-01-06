@@ -14,7 +14,7 @@ public class KoneksiDB {
             Class.forName(driver);
             conn = DriverManager.getConnection(url, username, password);
         }catch(Exception e){
-            System.out.println(e);
+            System.out.println("Gagal Terhubung Dengan Database");
         }
         return conn;
     }

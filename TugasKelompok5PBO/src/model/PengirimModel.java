@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.sql.*;
 import java.util.List;
 
-public class PengirimModel extends AbstractClass{
+public class PengirimModel extends KoneksiDataBase implements AmbilSatuData<PengirimEntity>,MenghapusAkun{
     private List<PengirimEntity> dataPengirim = new ArrayList();
     
-    public List<PengirimEntity> getPengirim(){
+    public List<PengirimEntity> getAllPengirim(){
         List<PengirimEntity> dataUser = new ArrayList<>();
         try{
             Statement stat = conn.createStatement();
@@ -19,12 +19,13 @@ public class PengirimModel extends AbstractClass{
                 dataUser.add(new PengirimEntity(new LoginEntity(rs.getString("username"),rs.getString("password")),rs.getInt("id"),rs.getString("nama"),rs.getString("alamat"),rs.getString("noTelp")));
             }
         }catch(SQLException e){
-            System.out.println(e);
+            System.out.println("Tabel Tidak Diemukan");
         }
         return dataUser;
     }
     
-    public ArrayList<PengirimEntity> getPengirim(int id){
+    @Override
+    public ArrayList<PengirimEntity> ambilSatuData(int id){
         ArrayList<PengirimEntity> arrayListUser = new ArrayList();
         try{
             sql = "SELECT * FROM pengguna where id=?";
@@ -35,7 +36,7 @@ public class PengirimModel extends AbstractClass{
                 arrayListUser.add(new PengirimEntity(new LoginEntity(rs.getString("username"),rs.getString("password")),rs.getInt("id"),rs.getString("nama"),rs.getString("alamat"),rs.getString("noTelp")));
             }
         }catch(SQLException e){
-            System.out.println(e);
+            System.out.println("Id Tidak Diemukan");
         }
         return arrayListUser;        
     }
@@ -52,7 +53,7 @@ public class PengirimModel extends AbstractClass{
                 return pengirim;
             }
         }catch(SQLException e){
-            System.out.println(e);
+            System.out.println("Id Tidak Diemukan");
         }
         return null;
     }
@@ -68,7 +69,7 @@ public class PengirimModel extends AbstractClass{
             stmt.setString(5, pengirim.getLoginUser().getPassword());
             return stmt.executeUpdate();
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("Tabel Tidak Diemukan");
             return -1;
         }
     }
@@ -81,7 +82,7 @@ public class PengirimModel extends AbstractClass{
             stmt.setInt(2, id);
             return stmt.executeUpdate();
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("Id Tidak Diemukan");
             return -1;
         }
     }
@@ -94,7 +95,7 @@ public class PengirimModel extends AbstractClass{
             stmt.setInt(2, id);
             return stmt.executeUpdate();
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("Id Tidak Diemukan");
             return -1;
         }
     }
@@ -107,7 +108,7 @@ public class PengirimModel extends AbstractClass{
             stmt.setInt(2, id);
             return stmt.executeUpdate();
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("Id Tidak Diemukan");
             return -1;
         }
     }
@@ -120,23 +121,24 @@ public class PengirimModel extends AbstractClass{
             stmt.setInt(2, id);
             return stmt.executeUpdate();
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("Id Tidak Diemukan");
             return -1;
         }
     }
     
-    public int deleteUser(int id){
+    @Override
+    public int hapusAkun(int id){
         try{
             sql = "DELETE FROM pengguna WHERE id=?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, id);
             return stmt.executeUpdate();
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("Id Tidak Diemukan");
             return -1;
         }
     }
-   
+    
     public int cekLogin(String username, String password) {
         int cek = 0;
         try{
@@ -153,7 +155,7 @@ public class PengirimModel extends AbstractClass{
                 cek=0;
             }
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("Akun Tidak Diemukan");
         }
         return cek;
     }

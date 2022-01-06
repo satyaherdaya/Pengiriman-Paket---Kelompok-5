@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import entity.PenerimaEntity;
 import java.util.List;
 
-public class PenerimaModel extends AbstractClass{
+public class PenerimaModel extends KoneksiDataBase implements AmbilSatuData<PenerimaEntity>{
     private String sql;
     private List<PenerimaEntity> dataPenerima = new ArrayList();
     
@@ -20,12 +20,13 @@ public class PenerimaModel extends AbstractClass{
             stmt.setString(3, penerima.getNoTelp());
             return stmt.executeUpdate();
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("Tabel Tidak Diemukan");
             return -1;
         }
     }
     
-    public List<PenerimaEntity> getPenerima(int id){
+    @Override
+    public List<PenerimaEntity> ambilSatuData(int id){
         List<PenerimaEntity> arrayListPenerima = new ArrayList();
         try{
             sql = "SELECT * FROM penerima where id=?";
@@ -35,8 +36,8 @@ public class PenerimaModel extends AbstractClass{
             while(rs.next()){
                 arrayListPenerima.add(new PenerimaEntity(rs.getInt("id"),rs.getString("nama"),rs.getString("alamat"),rs.getString("noTelp")));
             }
-        }catch(SQLException eSatya){
-            System.out.println(eSatya);
+        }catch(SQLException e){
+            System.out.println("Id Tidak Diemukan");
         }
         return arrayListPenerima;
     }
@@ -53,7 +54,7 @@ public class PenerimaModel extends AbstractClass{
                 return penerima;
             }
         }catch(SQLException e){
-            System.out.println(e);
+            System.out.println("Id Tidak Diemukan");
         }
         return null;
     }

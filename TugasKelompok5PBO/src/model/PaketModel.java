@@ -5,7 +5,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PaketModel extends AbstractClass{
+public class PaketModel extends KoneksiDataBase implements AmbilSatuData<PaketEntity>{
     private List<PaketEntity> dataPaket = new ArrayList();
     
     public int insert(PaketEntity paket){
@@ -16,12 +16,13 @@ public class PaketModel extends AbstractClass{
             ps.setInt(2, paket.getId());
             return ps.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Tabel Tidak Diemukan");
             return -1;
         }
     }
     
-    public List<PaketEntity> getPaket(int id){
+    @Override
+    public List<PaketEntity> ambilSatuData(int id){
         List<PaketEntity> dataPaket = new ArrayList();
         
         try{
@@ -33,7 +34,7 @@ public class PaketModel extends AbstractClass{
                 dataPaket.add(new PaketEntity(rs.getInt("id"),rs.getString("namaBarang"),rs.getInt("beratPaket")));
             }
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println("Id Tidak Diemukan");
         }
         return dataPaket;
     }
@@ -50,7 +51,7 @@ public class PaketModel extends AbstractClass{
                 return paket;
             }
         }catch(SQLException e){
-            System.out.println(e);
+            System.out.println("Id Tidak Diemukan");
         }
         return null;
     }

@@ -7,12 +7,14 @@ import entity.ResiEntity;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
-public class ResiController {
+public class ResiController implements AmbilSatuData<ResiEntity>{
     public void insertData(PengirimEntity penduduk,PenerimaEntity penerima, PaketEntity paket,String waktuBerangkat){
         AllObjModel.resiModel.insert(new ResiEntity(penduduk,penerima,paket,waktuBerangkat));
     }
-    public ArrayList<ResiEntity> getDatabyPengirim(int id){
-        return AllObjModel.resiModel.getResibyPengirim(id);
+    
+    @Override
+    public ArrayList<ResiEntity> ambilSatuData(int id){
+        return AllObjModel.resiModel.ambilSatuData(id);
     }
     
     public ArrayList<ResiEntity> getData(){
@@ -51,7 +53,7 @@ public class ResiController {
         Object[] kolom = {"ID","ID PENGIRIM","NAMA PENGIRIM","ALAMAT PENGIRIM","NO TELP PENGIRIM","ID PENERIMA","NAMA PENERIMA","ALAMAT PENERIMA","NO TELP PENERIMA","ID PAKET","NAMA PAKET","BERAT PAKET","ESTIMASI SAMPAI","STATUS"};
         listDataResi.setColumnIdentifiers(kolom);
         
-        int size = getDatabyPengirim(id).size();
+        int size = ambilSatuData(id).size();
         for(int i = 0;i<size;i++){
             Object[] data = new Object[14];
             data[0] = AllObjModel.resiModel.getResi().get(i).getId();

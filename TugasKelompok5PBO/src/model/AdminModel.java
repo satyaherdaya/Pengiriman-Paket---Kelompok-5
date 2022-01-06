@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.sql.*;
 import java.util.List;
 
-public class AdminModel extends AbstractClass{
-    public List<AdminEntity> getAdmin(){
+public class AdminModel extends KoneksiDataBase implements AmbilSatuData<AdminEntity>,MenghapusAkun{
+    public List<AdminEntity> getAllAdmin(){
         List<AdminEntity> dataAdmin = new ArrayList<>();
         try{
             Statement stat = conn.createStatement();
@@ -18,12 +18,13 @@ public class AdminModel extends AbstractClass{
                 dataAdmin.add(new AdminEntity(new LoginEntity(rs.getString("username"),rs.getString("password")),rs.getInt("id"),rs.getString("nama"),rs.getString("alamat"),rs.getString("noTelp")));
             }
         }catch(SQLException e){
-            System.out.println(e);
+            System.out.println("Tabel Tidak Ditemukan");
         }
         return dataAdmin;
     }
     
-    public List<AdminEntity> getAdmin(int id){
+    @Override
+    public List<AdminEntity> ambilSatuData(int id){
         List<AdminEntity> dataAdmin = new ArrayList<>();
         try{
             sql = "SELECT * FROM admin where id=?";
@@ -34,7 +35,7 @@ public class AdminModel extends AbstractClass{
                 dataAdmin.add(new AdminEntity(new LoginEntity(rs.getString("username"),rs.getString("password")),rs.getInt("id"),rs.getString("nama"),rs.getString("alamat"),rs.getString("noTelp")));
             }
         }catch(SQLException e){
-            System.out.println(e);
+            System.out.println("Id Tidak Ditemukan");
         }
         return dataAdmin;
     }
@@ -50,19 +51,20 @@ public class AdminModel extends AbstractClass{
             stmt.setString(5, admin.getLoginAdmin().getPassword());
             return stmt.executeUpdate();
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("Tabel Tidak Ditemukan");
             return -1;
         }
     }
     
-    public int deleteAdmin(int id){
+    @Override
+    public int hapusAkun(int id){
         try{
             sql = "DELETE FROM admin WHERE id=?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, id);
             return stmt.executeUpdate();
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("Id Tidak Ditemukan");
             return -1;
         }
     }
@@ -83,7 +85,7 @@ public class AdminModel extends AbstractClass{
                 cek=0;
             }
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("Akun Tidak Ditemukan");
         }
         return cek;
     }
@@ -97,7 +99,7 @@ public class AdminModel extends AbstractClass{
             stmt.setInt(2, id);
             return stmt.executeUpdate();
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("Id Tidak Diemukan");
             return -1;
         }
     }
@@ -110,7 +112,7 @@ public class AdminModel extends AbstractClass{
             stmt.setInt(2, id);
             return stmt.executeUpdate();
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("Id Tidak Diemukan");
             return -1;
         }
     }
@@ -123,7 +125,7 @@ public class AdminModel extends AbstractClass{
             stmt.setInt(2, id);
             return stmt.executeUpdate();
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("Id Tidak Diemukan");
             return -1;
         }
     }
@@ -136,7 +138,7 @@ public class AdminModel extends AbstractClass{
             stmt.setInt(2, id);
             return stmt.executeUpdate();
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("Id Tidak Diemukan");
             return -1;
         }
     }
@@ -150,7 +152,7 @@ public class AdminModel extends AbstractClass{
             stmt.setInt(2, id);
             return stmt.executeUpdate();
         }catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("Id Tidak Diemukan");
             return -1;
         }
     }

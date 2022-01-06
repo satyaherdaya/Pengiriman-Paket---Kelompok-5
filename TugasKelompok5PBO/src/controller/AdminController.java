@@ -1,18 +1,18 @@
 package controller;
 
-import java.util.ArrayList;
 import entity.AdminEntity;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
-public class AdminController{
+public class AdminController implements AmbilSatuData<AdminEntity>,HapusAkun{
     
     public List<AdminEntity> getData(){
-        return AllObjModel.adminModel.getAdmin();
+        return AllObjModel.adminModel.getAllAdmin();
     }
     
-    public List<AdminEntity> getData(int id){
-        return AllObjModel.adminModel.getAdmin(id);
+    @Override
+    public List<AdminEntity> ambilSatuData(int id){
+        return AllObjModel.adminModel.ambilSatuData(id);
     }
     
     public int insert(AdminEntity admin){    
@@ -35,8 +35,9 @@ public class AdminController{
         return AllObjModel.adminModel.updateNoTelpAdmin(id, noTelp);
     }
     
-    public int delete(int id){
-        return AllObjModel.adminModel.deleteAdmin(id);
+    @Override
+    public int hapusAkun(int id){
+        return AllObjModel.adminModel.hapusAkun(id);
     }
     
     public int cekLogin(String username, String password){
@@ -55,10 +56,10 @@ public class AdminController{
         int size = getData().size();
         for(int i = 0;i<size;i++){
             Object[] data = new Object[14];
-            data[0] = AllObjModel.adminModel.getAdmin().get(i).getId();
-            data[1] = AllObjModel.adminModel.getAdmin().get(i).getNama();
-            data[2] = AllObjModel.adminModel.getAdmin().get(i).getAlamat();
-            data[3] = AllObjModel.adminModel.getAdmin().get(i).getNoTelp();
+            data[0] = AllObjModel.adminModel.getAllAdmin().get(i).getId();
+            data[1] = AllObjModel.adminModel.getAllAdmin().get(i).getNama();
+            data[2] = AllObjModel.adminModel.getAllAdmin().get(i).getAlamat();
+            data[3] = AllObjModel.adminModel.getAllAdmin().get(i).getNoTelp();
             listDataAdmin.addRow(data);
         }
         return listDataAdmin;

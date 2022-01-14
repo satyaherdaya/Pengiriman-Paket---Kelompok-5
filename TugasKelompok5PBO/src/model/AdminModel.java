@@ -6,6 +6,7 @@ import entity.ResiEntity;
 import java.util.ArrayList;
 import java.sql.*;
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 public class AdminModel extends KoneksiDataBase implements AmbilSatuData<AdminEntity>,MenghapusAkun{
     public List<AdminEntity> getAllAdmin(){
@@ -155,5 +156,22 @@ public class AdminModel extends KoneksiDataBase implements AmbilSatuData<AdminEn
             System.out.println("Id Tidak Diemukan");
             return -1;
         }
+    }
+    
+    public DefaultTableModel dataAdmin(){
+        DefaultTableModel listDataAdmin = new DefaultTableModel();
+        Object[] kolom = {"ID","NAMA","ALAMAT","NO TELP"};
+        listDataAdmin.setColumnIdentifiers(kolom);
+        
+        int size = getAllAdmin().size();
+        for(int i = 0;i<size;i++){
+            Object[] data = new Object[14];
+            data[0] = getAllAdmin().get(i).getId();
+            data[1] = getAllAdmin().get(i).getNama();
+            data[2] = getAllAdmin().get(i).getAlamat();
+            data[3] = getAllAdmin().get(i).getNoTelp();
+            listDataAdmin.addRow(data);
+        }
+        return listDataAdmin;
     }
 }

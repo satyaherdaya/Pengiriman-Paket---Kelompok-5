@@ -49,19 +49,6 @@ public class AdminController implements AmbilSatuData<AdminEntity>,HapusAkun{
     }
     
     public DefaultTableModel dataAdmin(){
-        DefaultTableModel listDataAdmin = new DefaultTableModel();
-        Object[] kolom = {"ID","NAMA","ALAMAT","NO TELP"};
-        listDataAdmin.setColumnIdentifiers(kolom);
-        
-        int size = getData().size();
-        for(int i = 0;i<size;i++){
-            Object[] data = new Object[14];
-            data[0] = AllObjModel.adminModel.getAllAdmin().get(i).getId();
-            data[1] = AllObjModel.adminModel.getAllAdmin().get(i).getNama();
-            data[2] = AllObjModel.adminModel.getAllAdmin().get(i).getAlamat();
-            data[3] = AllObjModel.adminModel.getAllAdmin().get(i).getNoTelp();
-            listDataAdmin.addRow(data);
-        }
-        return listDataAdmin;
+        return AllObjModel.adminModel.dataAdmin();
     }
 }

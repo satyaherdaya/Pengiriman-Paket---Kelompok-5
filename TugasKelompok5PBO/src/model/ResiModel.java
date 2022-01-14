@@ -6,6 +6,7 @@ import entity.PengirimEntity;
 import entity.ResiEntity;
 import java.util.ArrayList;
 import java.sql.*;
+import javax.swing.table.DefaultTableModel;
 
 public class ResiModel extends KoneksiDataBase implements AmbilSatuData<ResiEntity>{
     private PengirimModel pengirimModel = new PengirimModel();
@@ -58,5 +59,63 @@ public class ResiModel extends KoneksiDataBase implements AmbilSatuData<ResiEnti
             System.out.println("Id Tidak Diemukan");
         }
         return dataPaket;
+    }
+    
+    public DefaultTableModel dataResi(){
+        DefaultTableModel listDataResi = new DefaultTableModel();
+        Object[] kolom = {"ID","ID PENGIRIM","NAMA PENGIRIM","ALAMAT PENGIRIM","NO TELP PENGIRIM","ID PENERIMA","NAMA PENERIMA","ALAMAT PENERIMA","NO TELP PENERIMA","ID PAKET","NAMA PAKET","BERAT PAKET","ESTIMASI SAMPAI","STATUS"};
+        listDataResi.setColumnIdentifiers(kolom);
+        
+        int size = getResi().size();
+        for(int i = 0;i<size;i++){
+            Object[] data = new Object[14];
+            data[0] = getResi().get(i).getId();
+            data[1] = getResi().get(i).getPengirim().getId();
+            data[2] = getResi().get(i).getPengirim().getNama();
+            data[3] = getResi().get(i).getPengirim().getAlamat();
+            data[4] = getResi().get(i).getPengirim().getNoTelp();
+            data[5] = getResi().get(i).getPenerima().getId();
+            data[6] = getResi().get(i).getPenerima().getNama();
+            data[7] = getResi().get(i).getPenerima().getAlamat();
+            data[8] = getResi().get(i).getPenerima().getNoTelp();
+            data[9] = getResi().get(i).getPaket().getId();
+            data[10] = getResi().get(i).getPaket().getNamaPaket();
+            data[11] = getResi().get(i).getPaket().getBeratPaket();
+            data[12] = getResi().get(i).getWaktuBerangkat();
+            data[13] = getResi().get(i).getStatus();
+            listDataResi.addRow(data);
+        }
+        return listDataResi;
+    }
+    
+    public DefaultTableModel dataResi(int id){
+        DefaultTableModel listDataResi = new DefaultTableModel();
+        Object[] kolom = {"ID","ID PENGIRIM","NAMA PENGIRIM","ALAMAT PENGIRIM","NO TELP PENGIRIM","ID PENERIMA","NAMA PENERIMA","ALAMAT PENERIMA","NO TELP PENERIMA","ID PAKET","NAMA PAKET","BERAT PAKET","ESTIMASI SAMPAI","STATUS"};
+        listDataResi.setColumnIdentifiers(kolom);
+        
+        int size = ambilSatuData(id).size();
+        for(int i = 0;i<size;i++){
+            Object[] data = new Object[14];
+            data[0] = getResi().get(i).getId();
+            data[1] = getResi().get(i).getPengirim().getId();
+            data[2] = getResi().get(i).getPengirim().getNama();
+            data[3] = getResi().get(i).getPengirim().getAlamat();
+            data[4] = getResi().get(i).getPengirim().getNoTelp();
+            data[5] = getResi().get(i).getPenerima().getId();
+            data[6] = getResi().get(i).getPenerima().getNama();
+            data[7] = getResi().get(i).getPenerima().getAlamat();
+            data[8] = getResi().get(i).getPenerima().getNoTelp();
+            data[9] = getResi().get(i).getPaket().getId();
+            data[10] = getResi().get(i).getPaket().getNamaPaket();
+            data[11] = getResi().get(i).getPaket().getBeratPaket();
+            data[12] = getResi().get(i).getWaktuBerangkat();
+            if(getResi().get(i).getStatus()==1){
+                data[13] = "PAKET TERKIRIM";
+            }else{
+                data[13] = "PAKET SEDANG DI PROSES";
+            }
+            listDataResi.addRow(data);
+        }
+        return listDataResi;
     }
 }

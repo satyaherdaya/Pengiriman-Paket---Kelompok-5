@@ -34,8 +34,6 @@ public class KirimPaket extends JFrame{
         initComponent(cek);
     }
     
-    
-    
     void initComponent(int cek){
          setTitle("REGISTRASI PAKET");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -114,17 +112,19 @@ public class KirimPaket extends JFrame{
                 String alamat = tfalamat.getText();
                 String noTelp = tfnotelp.getText();
                 if(cbberangkat.getSelectedIndex()==1){
-                    waktuberangkat = hari[1];
+                    waktuberangkat = "Same Day";
                 }else if(cbberangkat.getSelectedIndex()==2){
-                    waktuberangkat = hari[2];
+                    waktuberangkat = "1-3 Hari";
                 }else if(cbberangkat.getSelectedIndex()==3){
-                    waktuberangkat = hari[3];
+                    waktuberangkat = "5 Hari";
                 }
                 if(namapaket.length()!=0 && beratpaket!=0 && nama.length()!=0 && alamat.length()!=0 && noTelp.length()!=0){
                     AllObjController.paketController.insertData(new PaketEntity(namapaket,beratpaket));
                     AllObjController.penerimaController.insertPenerima(new PenerimaEntity(nama,alamat,noTelp));
-                    AllObjController.resiController.insertData(AllObjController.pengirimController.getPengirim(cek), new PenerimaEntity(nama,alamat,noTelp), new PaketEntity(namapaket,beratpaket),waktuberangkat);
-                    JOptionPane.showMessageDialog(null, "Paket Telah TErdata");
+                    int idpaket = AllObjController.paketController.getIdPaket(namapaket);
+                    int idpenerima = AllObjController.penerimaController.getIdPenerima(nama);
+                    AllObjController.resiController.insertData(AllObjController.pengirimController.getPengirim(cek), AllObjController.penerimaController.getPenerima(idpenerima), AllObjController.paketController.getPaket(idpaket),waktuberangkat);
+                    JOptionPane.showMessageDialog(null, "Paket Telah Terdata");
                     new MenuUser(cek).setVisible(true);
                     dispose();
                 }else{

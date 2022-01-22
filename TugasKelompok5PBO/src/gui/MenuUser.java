@@ -115,7 +115,7 @@ public class MenuUser extends JFrame{
         btnviewtransaksi.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ViewResi(cek).setVisible(true);
+                new ViewResiPengirim(cek).setVisible(true);
                 dispose();
             }
         });

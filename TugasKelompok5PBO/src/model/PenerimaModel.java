@@ -13,7 +13,7 @@ public class PenerimaModel extends KoneksiDataBase implements AmbilSatuData<Pene
     
     public int insertPenerima(PenerimaEntity penerima){
         try{
-            sql = "INSERT INTO penerima(nama,alamat,noTelp) values(?,?,?)";
+            sql = "INSERT INTO penerima(nama,alamat,noTelp) VALUES(?,?,?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, penerima.getNama());
             stmt.setString(2, penerima.getAlamat());
@@ -29,7 +29,7 @@ public class PenerimaModel extends KoneksiDataBase implements AmbilSatuData<Pene
     public List<PenerimaEntity> ambilSatuData(int id){
         List<PenerimaEntity> arrayListPenerima = new ArrayList();
         try{
-            sql = "SELECT * FROM penerima where id=?";
+            sql = "SELECT * FROM penerima WHERE id=?";
             PreparedStatement stat = conn.prepareStatement(sql);
             stat.setInt(1, id);
             ResultSet rs = stat.executeQuery();
@@ -44,7 +44,7 @@ public class PenerimaModel extends KoneksiDataBase implements AmbilSatuData<Pene
     
     public PenerimaEntity getPenerimaEntity(int id){
         try{
-            sql = "SELECT * FROM pengguna where id=?";
+            sql = "SELECT * FROM penerima WHERE id=?";
             PreparedStatement stat = conn.prepareStatement(sql);
             stat.setInt(1, id);
             ResultSet rs = stat.executeQuery();
@@ -57,5 +57,21 @@ public class PenerimaModel extends KoneksiDataBase implements AmbilSatuData<Pene
             System.out.println("Id Tidak Diemukan");
         }
         return null;
+    }
+    
+    public int getIdPenerima(String nama){
+        int cek=0;
+        try{
+            sql = "SELECT * FROM penerima WHERE nama=?";
+            PreparedStatement stat = conn.prepareStatement(sql);
+            stat.setString(1, nama);
+            ResultSet rs = stat.executeQuery();
+            while(rs.next()){
+                cek = rs.getInt("id");
+            }
+        }catch(SQLException e){
+            System.out.println("Id Tidak Diemukan");
+        }
+        return cek;
     }
 }

@@ -12,4 +12,12 @@ public class PaketController implements AmbilSatuData<PaketEntity>{
     public List<PaketEntity> ambilSatuData(int id){
         return AllObjModel.paketModel.ambilSatuData(id);
     }
+    
+    public PaketEntity getPaket(int id){
+        return AllObjModel.paketModel.getPaketEntity(id);
+    }
+    
+    public int getIdPaket(String namaPaket){
+        return AllObjModel.paketModel.getIdPaket(namaPaket);
+    }
 }

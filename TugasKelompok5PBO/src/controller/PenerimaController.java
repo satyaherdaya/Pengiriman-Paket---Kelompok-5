@@ -12,4 +12,12 @@ public class PenerimaController implements AmbilSatuData<PenerimaEntity>{
     public List<PenerimaEntity> ambilSatuData(int id){
         return AllObjModel.penerimaModel.ambilSatuData(id);
     }
+    
+    public PenerimaEntity getPenerima(int id){
+        return AllObjModel.penerimaModel.getPenerimaEntity(id);
+    }
+    
+    public int getIdPenerima(String nama){
+        return AllObjModel.penerimaModel.getIdPenerima(nama);
+    }
 }

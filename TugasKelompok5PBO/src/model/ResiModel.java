@@ -14,7 +14,7 @@ public class ResiModel extends KoneksiDataBase implements AmbilSatuData<ResiEnti
     private PaketModel paketModel = new PaketModel();
     
     public int insert(ResiEntity resi){
-        sql = "INSERT INTO resi(pengirim,penerima,paket,tanggalBerangkat) VALUES(?,?,?,?)";
+        sql = "INSERT INTO resi(pengirim,penerima,paket,waktuBerangkat) VALUES(?,?,?,?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1,resi.getPengirim().getId());
@@ -23,7 +23,7 @@ public class ResiModel extends KoneksiDataBase implements AmbilSatuData<ResiEnti
             ps.setString(4,resi.getWaktuBerangkat());
             return ps.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Tabel Tidak Diemukan");
+            System.out.println("Data salah");
             return -1;
         }
     }
@@ -32,15 +32,15 @@ public class ResiModel extends KoneksiDataBase implements AmbilSatuData<ResiEnti
     public ArrayList<ResiEntity> ambilSatuData(int id){
         ArrayList<ResiEntity> dataPaket = new ArrayList();
         try{
-            sql = "SELECT * FROM resi WHERE pembeli in (?)";
+            sql = "SELECT * FROM resi WHERE pengirim LIKE ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                dataPaket.add(new ResiEntity(rs.getInt("id"),pengirimModel.getPengririmEntity(rs.getInt("pengirim")), penerimaModel.getPenerimaEntity(rs.getInt("penerima")),paketModel.getPaketEntity(rs.getInt("paket")), rs.getString("waktiBerangkat"), rs.getInt("status")));
+                dataPaket.add(new ResiEntity(rs.getInt("id"),pengirimModel.getPengririmEntity(rs.getInt("pengirim")), penerimaModel.getPenerimaEntity(rs.getInt("penerima")),paketModel.getPaketEntity(rs.getInt("paket")), rs.getString("waktuBerangkat"), rs.getInt("status")));
             }
         }catch(Exception e){
-            System.out.println("Id Tidak Diemukan");
+            System.out.println("Id Resi Tidak Diemukan");
         }
         return dataPaket;
     }
@@ -53,7 +53,7 @@ public class ResiModel extends KoneksiDataBase implements AmbilSatuData<ResiEnti
             Statement ps = conn.createStatement();
             ResultSet rs = ps.executeQuery(sql);
             while(rs.next()){
-                dataPaket.add(new ResiEntity(rs.getInt("id"),pengirimModel.getPengririmEntity(rs.getInt("pengirim")), penerimaModel.getPenerimaEntity(rs.getInt("penerima")),paketModel.getPaketEntity(rs.getInt("paket")), rs.getString("waktiBerangkat"), rs.getInt("status")));
+                dataPaket.add(new ResiEntity(rs.getInt("id"),pengirimModel.getPengririmEntity(rs.getInt("pengirim")), penerimaModel.getPenerimaEntity(rs.getInt("penerima")),paketModel.getPaketEntity(rs.getInt("paket")), rs.getString("waktuBerangkat"), rs.getInt("status")));
             }
         }catch(Exception e){
             System.out.println("Id Tidak Diemukan");

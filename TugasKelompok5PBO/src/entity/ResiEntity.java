@@ -12,9 +12,6 @@ public class ResiEntity {
     private String estimasiSampai;
     private int status;
 
-    public ResiEntity() {
-        this.status=StatusKirim.SELESAI;
-    }
 
     public ResiEntity(PengirimEntity pengirim, PenerimaEntity penerima,PaketEntity paket, String waktuBerangkat) {
         this.pengirim = pengirim;
@@ -30,6 +27,10 @@ public class ResiEntity {
         this.paket = paket;
         this.estimasiSampai = estimasiSampai;
         this.status = status;
+    }
+
+    public ResiEntity(int id) {
+        this.id=id;
     }
     
     public int getId() {
@@ -76,7 +77,7 @@ public class ResiEntity {
         return status;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setStatus() {
+        this.status = StatusKirim.SELESAI;
     }
 }

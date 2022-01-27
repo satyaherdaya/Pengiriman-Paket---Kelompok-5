@@ -120,10 +120,15 @@ public class KirimPaket extends JFrame{
                 }
                 if(namapaket.length()!=0 && beratpaket!=0 && nama.length()!=0 && alamat.length()!=0 && noTelp.length()!=0){
                     AllObjController.paketController.insertData(new PaketEntity(namapaket,beratpaket));
-                    AllObjController.penerimaController.insertPenerima(new PenerimaEntity(nama,alamat,noTelp));
                     int idpaket = AllObjController.paketController.getIdPaket(namapaket);
-                    int idpenerima = AllObjController.penerimaController.getIdPenerima(nama);
-                    AllObjController.resiController.insertData(AllObjController.pengirimController.getPengirim(cek), AllObjController.penerimaController.getPenerima(idpenerima), AllObjController.paketController.getPaket(idpaket),waktuberangkat);
+                    int idpenerima = AllObjController.penerimaController.getIdPenerima(new PenerimaEntity(nama,alamat,noTelp));
+                    if(idpenerima!=0){
+                        AllObjController.resiController.insertData(AllObjController.pengirimController.getPengirim(cek), AllObjController.penerimaController.getPenerima(idpenerima), AllObjController.paketController.getPaket(idpaket),waktuberangkat);
+                    }else{
+                        AllObjController.penerimaController.insertPenerima(new PenerimaEntity(nama,alamat,noTelp));
+                        idpenerima = AllObjController.penerimaController.getIdPenerima(new PenerimaEntity(nama,alamat,noTelp));
+                        AllObjController.resiController.insertData(AllObjController.pengirimController.getPengirim(cek), AllObjController.penerimaController.getPenerima(idpenerima), AllObjController.paketController.getPaket(idpaket),waktuberangkat);
+                    }
                     JOptionPane.showMessageDialog(null, "Paket Telah Terdata");
                     new MenuUser(cek).setVisible(true);
                     dispose();

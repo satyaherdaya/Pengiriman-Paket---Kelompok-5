@@ -59,12 +59,14 @@ public class PenerimaModel extends KoneksiDataBase implements AmbilSatuData<Pene
         return null;
     }
     
-    public int getIdPenerima(String nama){
+    public int getIdPenerima(PenerimaEntity penerima){
         int cek=0;
         try{
-            sql = "SELECT * FROM penerima WHERE nama=?";
+            sql = "SELECT * FROM penerima WHERE nama=? AND alamat=? AND noTelp=?";
             PreparedStatement stat = conn.prepareStatement(sql);
-            stat.setString(1, nama);
+            stat.setString(1, penerima.getNama());
+            stat.setString(2, penerima.getAlamat());
+            stat.setString(3, penerima.getNoTelp());
             ResultSet rs = stat.executeQuery();
             while(rs.next()){
                 cek = rs.getInt("id");

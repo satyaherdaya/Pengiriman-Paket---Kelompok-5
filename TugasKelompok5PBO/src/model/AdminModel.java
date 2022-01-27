@@ -146,9 +146,10 @@ public class AdminModel extends KoneksiDataBase implements AmbilSatuData<AdminEn
     
     public int verifResi(int id){
         try{
-            sql = "UPDATE resi SET status=?, WHERE id=?";
+            sql = "UPDATE resi SET status=? WHERE id=?";
             PreparedStatement stmt = conn.prepareStatement(sql);
-            ResiEntity resi = new ResiEntity();
+            ResiEntity resi = new ResiEntity(id);
+            resi.setStatus();
             stmt.setInt(1, resi.getStatus());
             stmt.setInt(2, id);
             return stmt.executeUpdate();

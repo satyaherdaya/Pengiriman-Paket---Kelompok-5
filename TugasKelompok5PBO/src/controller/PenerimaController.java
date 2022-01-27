@@ -17,7 +17,7 @@ public class PenerimaController implements AmbilSatuData<PenerimaEntity>{
         return AllObjModel.penerimaModel.getPenerimaEntity(id);
     }
     
-    public int getIdPenerima(String nama){
-        return AllObjModel.penerimaModel.getIdPenerima(nama);
+    public int getIdPenerima(PenerimaEntity penerima){
+        return AllObjModel.penerimaModel.getIdPenerima(penerima);
     }
 }
